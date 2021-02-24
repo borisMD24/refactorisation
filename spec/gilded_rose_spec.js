@@ -41,19 +41,46 @@ describe("GildedRose shop manager", function () {
     });
   });
   it("la qualite des Aged Brie et Backstage passes augmentent par trois si il reste 5 jours ou moins", function () {
-    listItems.push(new Item("Aged Brie", 5, 30));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 4, 25));
-  
-    const gildedRose = new Shop(listItems);
-    const items = gildedRose.updateQuality();
-  
-    var expected = [
-      { sellIn: 4, quality: 33 },
-      { sellIn: 3, quality: 28 },
-    ];
-    expected.forEach(function (testCase, idx) {
-      expect(items[idx].quality).toBe(testCase.quality);
-      expect(items[idx].sellIn).toBe(testCase.sellIn);
-    });
+  listItems.push(new Item("Aged Brie", 5, 30));
+  listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 4, 25));
+
+  const gildedRose = new Shop(listItems);
+  const items = gildedRose.updateQuality();
+
+  var expected = [
+    { sellIn: 4, quality: 31 },
+    { sellIn: 3, quality: 28 },
+  ];
+  expected.forEach(function (testCase, idx) {
+    expect(items[idx].quality).toBe(testCase.quality);
+    expect(items[idx].sellIn).toBe(testCase.sellIn);
   });
 });
+});
+
+describe("GildedRose shop manager Sulfuras", function () {
+  var listSulfuras;
+
+  beforeEach(function () {
+    listSulfuras = [];
+  });
+
+it("test de la constance de la qualite des Sulfuras", function () {
+  listSulfuras.push(new Item("Sulfuras, Hand of Ragnaros",20, 80));
+  listSulfuras.push(new Item("Sulfuras, Hand of Ragnaros", 15, 80));
+  
+  const gildedRose = new Shop(listSulfuras);
+  const items = gildedRose.updateQuality();
+  
+  var expected = [
+    { sellIn: 20, quality: 80 },
+    { sellIn: 15, quality: 80 },
+  ];
+  expected.forEach(function (testCase, idx) {
+    expect(items[idx].quality).toBe(testCase.quality);
+    expect(items[idx].sellIn).toBe(testCase.sellIn);
+  });
+  });
+});
+
+
